@@ -14,7 +14,8 @@ export  function RQSuperHeroesPage() {
     'super-heroes',
     fetchSuperHeroes,
     {
-      cacheTime:1000, //set the time for store the fetched data
+      // cacheTime:1000, //set the time for store the fetched data
+      staleTime:5000,
     }
     )
 

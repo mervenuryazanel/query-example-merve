@@ -1,0 +1,6 @@
+1.in this app each page is a component that can be routed in the applicaiton
+
+
+//start the applicaiton
+1.to run the server ----> yarn serve-json
+2.to run the client ----> yarn start

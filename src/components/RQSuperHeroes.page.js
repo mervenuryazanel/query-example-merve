@@ -14,13 +14,9 @@ export  function RQSuperHeroesPage() {
     'super-heroes',
     fetchSuperHeroes,
     {
-      refetchOnMount:true,
-      //the data will be refetch on mount if the data is stale. (default:true)
-      //If it is false the query will not fetch on mount.
-      //If it is 'always' the query fetch data whether the data is stale or not
-
-      refetchOnWindowFocus:true
-      //the data will be fetch every time the window has focused. (default:true)
+     refetchInterval:2000, // the query will continuously refetch at this frequency in milliseconds.
+     refetchIntervalInBackground:true 
+     //If set to true, the query will continue to refetch while their tab/window is in the background. Defaults to false.
     }
     )
 

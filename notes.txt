@@ -17,3 +17,8 @@ staleTime: set the time that how long the data will be keeped as fresh (and afte
  -If it is 'always' the query fetch data whether the data is stale or not
 
 refetchOnWindowFocus: the data will be fetch every time the window has focused. (default:true)
+
+5.useQuery('super-heroes',fetchSuperHeroes,{refetchInterval:2000, refetchIntervalInBackground:true })
+refetchInterval: the query will continuously refetch at this frequency in milliseconds.
+refetchIntervalInBackground: If set to true, the query will continue to refetch while their tab/window is in the background. Defaults to false.
+    

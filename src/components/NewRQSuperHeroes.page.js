@@ -23,9 +23,14 @@ export function NewRQSuperHeroesPage() {
         <>
             <h2>New Super Heroes Page</h2>
             <button onClick={refetch}>Show Heroes</button>
-            {data?.map((hero) => {
+            {/* {data?.map((hero) => {
                 return (<p key={hero}>{hero}</p>)
-            })}
+            })} */}
+            {
+                data?.data.map(hero => {
+                    return <div key={hero.name}>{hero.name}</div>
+                })
+            }
         </>
     )
 

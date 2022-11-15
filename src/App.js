@@ -6,6 +6,7 @@ import { HomePage } from './components/Home.page'
 import { RQSuperHeroesPage } from './components/RQSuperHeroes.page'
 import { SuperHeroesPage } from './components/SuperHeroes.page'
 import { NewRQSuperHeroesPage } from './components/NewRQSuperHeroes.page';
+import RQSuperHeroPage from './components/RQSuperHero.page';
 
 
 //create an instance of the query client
@@ -34,6 +35,9 @@ function App() {
             </ul>
           </nav>
           <Routes>
+            <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />} >
+              {/* <SuperHeroesPage /> */}
+            </Route>
             <Route path='/super-heroes' element={<SuperHeroesPage />} >
               {/* <SuperHeroesPage /> */}
             </Route>

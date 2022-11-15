@@ -6,7 +6,6 @@ const fetchSuperHeroes = () => {
 }
 
 export const useSuperHeroesData = (onSuccess, onError, properties) => {
-    console.log("properties", properties)
 
     return useQuery(
         'super-heroes',
@@ -14,10 +13,10 @@ export const useSuperHeroesData = (onSuccess, onError, properties) => {
         {
             onSuccess,
             onError,
-            select: (data) => {
-                const heroNames = data.data.map((hero) => hero.name);
-                return heroNames;
-            },
+            // select: (data) => {
+            //     const heroNames = data.data.map((hero) => hero.name);
+            //     return heroNames;
+            // },
             ...properties
         }
     )

@@ -5,7 +5,7 @@ const fetchSuperHeroes = () => {
     return axios.get("http://localhost:4000/superheros")
 }
 
-export const useSuperHeroesData = (onSuccess, onError, properties) => {
+export const useSuperHeroesData = (onSuccess, onError, options) => {
 
     return useQuery(
         'super-heroes',
@@ -17,7 +17,7 @@ export const useSuperHeroesData = (onSuccess, onError, properties) => {
             //     const heroNames = data.data.map((hero) => hero.name);
             //     return heroNames;
             // },
-            ...properties
+            ...options
         }
     )
 }

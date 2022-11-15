@@ -37,3 +37,33 @@ useQuery('super-heroes',fetchSuperHeroes,
        }})
 
 After that inside the component we can use heroNames, cause it refers to the original data.
+
+8.Query By inside
+First we should be able to create a query key for each hero (['super-hero', heroId])
+useQuery(['super-hero', heroId], fetchSuperHero);  in here we can define the query qey as an array and 
+give the hero id to it as a second argument.
+Secondly we need to chnage the fetch function in order to give it the heroId
+const fetchSuperHero = (heroId) => {
+ return axios.get(`http://localhost:4000/superheros/${heroId}`)
+}
+
+export const useSuperHeroData = (heroId) => {
+    return useQuery(['super-hero', heroId], () => fetchSuperHero(heroId));
+}
+
+but we can do it simpler like that:
+
+const fetchSuperHero = ({ queryKey }) => {
+    const heroId = queryKey[1];
+    console.log("query key:", queryKey);
+    return axios.get(`http://localhost:4000/superheros/${heroId}`)
+}
+export const useSuperHeroData = (heroId) => {
+    return useQuery(['super-hero', heroId], fetchSuperHero);
+}
+
+because react query provides queryKey to us adn we can destructure the id from it and use it easily.
+And we can use the new hook (useSuperHeroData) inside our new page (RQSuperHero)
+And don't forget to add the path to the app.js like this:
+<Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />} >
+</Route>

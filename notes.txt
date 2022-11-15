@@ -18,7 +18,12 @@ staleTime: set the time that how long the data will be keeped as fresh (and afte
 
 refetchOnWindowFocus: the data will be fetch every time the window has focused. (default:true)
 
-5.useQuery('super-heroes',fetchSuperHeroes,{refetchInterval:2000, refetchIntervalInBackground:true })
+5.Polling
+useQuery('super-heroes',fetchSuperHeroes,{refetchInterval:2000, refetchIntervalInBackground:true })
 refetchInterval: the query will continuously refetch at this frequency in milliseconds.
 refetchIntervalInBackground: If set to true, the query will continue to refetch while their tab/window is in the background. Defaults to false.
-    
+
+6.Fetch On Click
+First enable the fetch on component mount. useQuery('super-heroes',fetchSuperHeroes,{enabled:false})
+Then inside the onClick of a button use 'refetch' function that React query provides us to fetch the data with query.
+Vola! That's it!

@@ -10,31 +10,24 @@ const fetchSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheros")
 }
 export function RQSuperHeroesPage() {
-  const [shouldFetch, setShouldFetch] = useState(true);
-
   const onSuccess = ({ data }) => {
     console.log("Data fetching is successfull.", data);
-    if (data.length === 4) {
-      //stop polling
-
-      setShouldFetch(false); //if there will be 4 heros stop the polling
-    }
   }
 
   const onError = (error) => {
     console.log("Error while data fetcing", error);
-    //stop polling
-    setShouldFetch(false); //if there will be an error stop the polling
-
   }
 
-  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
+  const { isLoading, data, isError, error, isFetching } = useQuery(
     'super-heroes',
     fetchSuperHeroes,
     {
-      refetchInterval: shouldFetch ? 2000 : false, //if the shouldFetch true then refetch every two seconds, else don't refetch
       onSuccess,
-      onError
+      onError,
+      select: (data) => {
+        const heroNames = data.data.map((hero) => hero.name);
+        return heroNames;
+      }
     }
   )
 
@@ -51,9 +44,14 @@ export function RQSuperHeroesPage() {
   return (
     <>
       <h2>RQ Super Heroes Page</h2>
-      {data?.data.map((hero) => {
+      {/* {data?.data.map((hero) => {
         return <div key={hero.name}> {hero.name}</div>
-      })}
+      })} */}
+      {
+        data.map(heroName => {
+          return <div key={heroName}>{heroName}</div>
+        })
+      }
     </>
   )
 }

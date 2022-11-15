@@ -27,3 +27,13 @@ refetchIntervalInBackground: If set to true, the query will continue to refetch 
 First enable the fetch on component mount. useQuery('super-heroes',fetchSuperHeroes,{enabled:false})
 Then inside the onClick of a button use 'refetch' function that React query provides us to fetch the data with query.
 Vola! That's it!
+
+7. Data Transformation
+To select a property from data use 'select' option.
+useQuery('super-heroes',fetchSuperHeroes,
+      { select: (data) => {
+        const heroNames = data.data.map((hero) => hero.name);
+        return heroNames;
+       }})
+
+After that inside the component we can use heroNames, cause it refers to the original data.

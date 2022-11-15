@@ -1,14 +1,7 @@
 //here you can see SuperHeroes page with data fetching with React Query
-
 //react query abstracts away all the useState and useEffect and their effects in the data fetch
+import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
 
-import axios from "axios";
-import { useState } from "react";
-import { useQuery } from "react-query";
-
-const fetchSuperHeroes = () => {
-  return axios.get("http://localhost:4000/superheros")
-}
 export function RQSuperHeroesPage() {
   const onSuccess = ({ data }) => {
     console.log("Data fetching is successfull.", data);
@@ -18,18 +11,7 @@ export function RQSuperHeroesPage() {
     console.log("Error while data fetcing", error);
   }
 
-  const { isLoading, data, isError, error, isFetching } = useQuery(
-    'super-heroes',
-    fetchSuperHeroes,
-    {
-      onSuccess,
-      onError,
-      select: (data) => {
-        const heroNames = data.data.map((hero) => hero.name);
-        return heroNames;
-      }
-    }
-  )
+  const { isLoading, data, isError, error, isFetching } = useSuperHeroesData(onSuccess, onError);
 
   console.log({ isLoading, isFetching });
 
@@ -44,11 +26,8 @@ export function RQSuperHeroesPage() {
   return (
     <>
       <h2>RQ Super Heroes Page</h2>
-      {/* {data?.data.map((hero) => {
-        return <div key={hero.name}> {hero.name}</div>
-      })} */}
       {
-        data.map(heroName => {
+        data?.map(heroName => {
           return <div key={heroName}>{heroName}</div>
         })
       }

@@ -14,8 +14,10 @@ export  function RQSuperHeroesPage() {
     'super-heroes',
     fetchSuperHeroes,
     {
-      // cacheTime:1000, //set the time for store the fetched data
-      staleTime:5000,
+      // cacheTime:1000, //set the time for store the fetched data in the cache
+      staleTime:10000, //set the time that how long the data will be keeped as fresh (and after that if we open the component a re-fetch will be required)
+
+      //note: cacheTime triggers the isLoading but the stale time doesn't. It triggers the isFetching.
     }
     )
 

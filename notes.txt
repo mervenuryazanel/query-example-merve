@@ -4,3 +4,9 @@
 //start the applicaiton
 1.to run the server ----> yarn serve-json
 2.to run the client ----> yarn start
+
+3.
+useQuery('super-heroes',fetchSuperHeroes,{cacheTime:1000,staleTime:10000})
+cacheTime: set the time for store the fetched data in the cache
+staleTime: set the time that how long the data will be keeped as fresh (and after that if we open the component a re-fetch will be required)
+//note: cacheTime triggers the isLoading but the stale time doesn't. It triggers the isFetching.

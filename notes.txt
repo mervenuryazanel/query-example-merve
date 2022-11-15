@@ -7,6 +7,13 @@
 
 3.
 useQuery('super-heroes',fetchSuperHeroes,{cacheTime:1000,staleTime:10000})
-cacheTime: set the time for store the fetched data in the cache
-staleTime: set the time that how long the data will be keeped as fresh (and after that if we open the component a re-fetch will be required)
+cacheTime: set the time for store the fetched data in the cache (default is 5 minutes)
+staleTime: set the time that how long the data will be keeped as fresh (and after that if we open the component a re-fetch will be required) (default is 0)
 //note: cacheTime triggers the isLoading but the stale time doesn't. It triggers the isFetching.
+
+4.useQuery('super-heroes',fetchSuperHeroes,{refetchOnMount:true, refetchOnWindowFocus:true})
+ refetchOnMount: the data will be refetch on mount if the data is stale. (default:true)
+ -If it is false the query will not fetch on mount.
+ -If it is 'always' the query fetch data whether the data is stale or not
+
+refetchOnWindowFocus: the data will be fetch every time the window has focused. (default:true)

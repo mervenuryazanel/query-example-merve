@@ -14,10 +14,13 @@ export  function RQSuperHeroesPage() {
     'super-heroes',
     fetchSuperHeroes,
     {
-      // cacheTime:1000, //set the time for store the fetched data in the cache
-      staleTime:10000, //set the time that how long the data will be keeped as fresh (and after that if we open the component a re-fetch will be required)
+      refetchOnMount:true,
+      //the data will be refetch on mount if the data is stale. (default:true)
+      //If it is false the query will not fetch on mount.
+      //If it is 'always' the query fetch data whether the data is stale or not
 
-      //note: cacheTime triggers the isLoading but the stale time doesn't. It triggers the isFetching.
+      refetchOnWindowFocus:true
+      //the data will be fetch every time the window has focused. (default:true)
     }
     )
 

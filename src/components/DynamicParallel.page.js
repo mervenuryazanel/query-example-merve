@@ -15,11 +15,20 @@ export default function DynamicParallelPage({ heroIds }) {
             }
         })
     )
-    console.log("query results", queryResults);
+    // console.log("query results", queryResults);
     return (
         <>
             <h2>Dynamic Parallel Page</h2>
-            { }
+
+            {
+                queryResults.map((data) => {
+                    return (
+                        <div>
+                            <p>{data?.data?.data.name}</p>
+                        </div>
+                    )
+                })
+            }
         </>
     )
 }

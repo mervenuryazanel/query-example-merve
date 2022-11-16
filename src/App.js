@@ -32,7 +32,13 @@ function App() {
                 <Link to='/rq-super-heroes'>RQ Super Heroes</Link>
               </li>
               <li>
-                <Link to='/new-rq-super-heroes'>New RQ Super Heroes</Link>
+                <Link to='/new-rq-super-heroes'>Another RQ Super Heroes with Button</Link>
+              </li>
+              <li>
+                <Link to='/rq-parallel'>Parallel Queries</Link>
+              </li>
+              <li>
+                <Link to='/rq-dynamic-parallel'>RQ Dynamic Parallel Queries</Link>
               </li>
             </ul>
           </nav>

@@ -1,3 +1,4 @@
+//fetch just one hero by id
 import { useParams } from 'react-router-dom'
 import React from 'react'
 import { useSuperHeroData } from '../hooks/useSuperHeroData'

@@ -67,3 +67,22 @@ And we can use the new hook (useSuperHeroData) inside our new page (RQSuperHero)
 And don't forget to add the path to the app.js like this:
 <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />} >
 </Route>
+
+9. Dynamic Parallel Queries
+If we need to fetch some data from the db and it is dynamic, changing data we should use dynamic parallel queries instead of parallel queries.
+For that all we need to do is to use 'useQueries' ('not 'useQuery') with ids.
+And then we can return the queryResult.
+
+const fetchSuperHero = (heroId) => {
+    return axios.get(`http://localhost:4000/superHeroes/${heroId}`);
+}
+
+ const queryResults = useQueries( //it returns an array of query results
+        heroIds.map((id) => {
+            return {
+                queryKey: ['super- hero', id],
+                queryFn: () => fetchSuperHero(id)
+            }
+        })
+    )
+    console.log("query results", queryResults);

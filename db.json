@@ -29,5 +29,21 @@
       "id": 3,
       "name": "Rachel Green"
     }
+  ],
+  "users": [
+    {
+      "id": "ophiuchusindelisi@gmail.com",
+      "channelId": "dundy awards channel"
+    }
+  ],
+  "channels": [
+    {
+      "id": "dundy awards channel",
+      "courses": ["the longest engament", "the funniest person", "the warrior"]
+    },
+    {
+      "id": "nobel prizes channel",
+      "courses": ["the math prize", "the physic prize", "the chemistry prize"]
+    }
   ]
 }

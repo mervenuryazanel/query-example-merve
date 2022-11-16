@@ -20,7 +20,8 @@ export default function DependentQueriesPage({ email }) {
             //double ! (!!) returns the value to a boolean
         });
     console.log("courses:", coursesData);
-    console.log("users", user)
+    console.log("users", user);
+
     return (
         <>
             <h2>Dependent Queries Page</h2>

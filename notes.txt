@@ -1,3 +1,6 @@
+//Thank Vishwas( @CodevolutionWeb) for all this tutorials and sources.
+//https://www.youtube.com/watch?v=HH68tHPq7tA&list=PLC3y8-rFHvwjTELCrPrcZlo6blLBUspd2&index=17&ab_channel=Codevolution
+
 1.in this app each page is a component that can be routed in the applicaiton
 
 
@@ -86,3 +89,9 @@ const fetchSuperHero = (heroId) => {
         })
     )
     console.log("query results", queryResults);
+
+10. Dependent Queries
+Can be used dependent queries whenever we need to execute queries sequentially (one query is dependent on another query).
+
+first create a query which find the correct user (with e-mail)
+secondly by using the chnannelId that belongs to the user create a second query and fetch channel details.

@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 // const fetchSuperHero = (heroId) => {
-//     return axios.get(`http://localhost:4000/superheros/${heroId}`)
+//     return axios.get(`http://localhost:4000/superHeroes/${heroId}`)
 // }
 // export const useSuperHeroData = (heroId) => {
 //     return useQuery(['super-hero', heroId], () => fetchSuperHero(heroId));
@@ -13,7 +13,7 @@ import axios from "axios";
 const fetchSuperHero = ({ queryKey }) => {
     const heroId = queryKey[1];
     console.log("query key:", queryKey);
-    return axios.get(`http://localhost:4000/superheros/${heroId}`)
+    return axios.get(`http://localhost:4000/superHeroes/${heroId}`)
 }
 export const useSuperHeroData = (heroId) => {
     return useQuery(['super-hero', heroId], fetchSuperHero);

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 const fetchSuperHeroes = () => {
-    return axios.get("http://localhost:4000/superheros")
+    return axios.get("http://localhost:4000/superHeroes")
 }
 
 export const useSuperHeroesData = (onSuccess, onError, options) => {

@@ -238,3 +238,39 @@ export const useAddSuperHeroData = () => {
 }
 
 And again, that's really all :)
+
+
+16. Handling Mutation Response
+
+When we create a hero a response returns from the this request and it stores the hero's data.
+So it might be usefull to use thie response instead of making a new get request. 
+
+(
+    response of the post--->
+    {
+        "name": "s",
+        "alterEgo": "asds",
+        "id": 6
+    }
+)
+
+
+
+export const useAddSuperHeroData = () => {
+    const queryClient = useQueryClient();
+    return useMutation(addSuperHero, {
+        onSuccess: (data) => { //data is entire response that turns from post request
+            // queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+            queryClient.setQueryData('super-heroes',  // //setQueryData updates the query cache
+                (oldQueryData) => { // this function automatically receives the all query data (what is present in the query cache) as an argument
+                    return {
+                        ...oldQueryData,
+                        data: [...oldQueryData.data, data.data]
+                    }
+
+                })  
+        }
+    })
+}
+
+Sum it up, with this configuration there will be no get request after the mutation

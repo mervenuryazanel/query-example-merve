@@ -25,8 +25,16 @@ export const useSuperHeroesData = (onSuccess, onError, options) => {
 export const useAddSuperHeroData = () => {
     const queryClient = useQueryClient();
     return useMutation(addSuperHero, {
-        onSuccess: () => { //run after mutation is successfull (invalidate querie's method for achieving that.)
-            queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+        onSuccess: (data) => { //data is entire response that turns from post request
+            // queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+            queryClient.setQueryData('super-heroes',  // //setQueryData updates the query cache
+                (oldQueryData) => { // this function automatically receives the all query data (what is present in the query cache) as an argument
+                    return {
+                        ...oldQueryData,
+                        data: [...oldQueryData.data, data.data]
+                    }
+
+                })
         }
     })
 }

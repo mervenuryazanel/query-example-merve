@@ -95,3 +95,25 @@ Can be used dependent queries whenever we need to execute queries sequentially (
 
 first create a query which find the correct user (with e-mail)
 secondly by using the chnannelId that belongs to the user create a second query and fetch channel details.
+
+11. Initial Query Data
+in the App.js we declerad the queryClient before, so that queryClient instance can access to the query cache
+    const queryClient = useQueryClient(); 
+    return useQuery(['super-hero', heroId], fetchSuperHero,
+        {
+            initialData: () => {
+                const hero = queryClient.getQueryData('super-heroes')?.data?.find(hero => hero.id === parseInt(heroId)); //get the hero from hero list by id
+
+                if (hero) {
+                    return {
+                        data: hero
+                    }
+                } else {
+                    return undefined;
+                }
+            }
+        });
+}
+
+Now if we open RQ Super Hero page and then go to the a suoer hero's detail page we don't see loading indicator anymore. Cause the datils page has an 
+initial query data which comes from RQ Super Hero Page's query. But a background fetching is still proccessed. 

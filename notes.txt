@@ -214,3 +214,27 @@ create a function to handle adding hero
 Lastly create a button to fire the handleAddHeroClick function
         <button onClick={refetch}>Show Heroes</button>
 Volaaa! You can see the new hero after refetch the heros and also in the db.json
+
+15. Query Validation
+
+For example, after we add a super hero we want to show the list of hero be able to update itself.
+For that follow these steps:
+
+- use useQueryClient to access releated query key
+    const queryClient = useQueryClient();
+
+    in useMutation function add a onSuccess option and inside of it invalidate queiry by this:
+            queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+After that useAddSuperHeroData function should be like:
+
+
+export const useAddSuperHeroData = () => {
+    const queryClient = useQueryClient();
+    return useMutation(addSuperHero, {
+        onSuccess: () => { //run after mutation is successfull (invalidate querie's method for achieving that.)
+            queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+        }
+    })
+}
+
+And again, that's really all :)

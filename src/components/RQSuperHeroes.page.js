@@ -18,7 +18,7 @@ export function RQSuperHeroesPage() {
   }
 
 
-  const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError, { enabled: false });
+  const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError);
   const { mutate: addHero, isLoading: isLoadingAdd, isError: isErrorAdd, error: errorAdd } = useAddSuperHeroData()
 
   const handleAddHeroClick = () => {

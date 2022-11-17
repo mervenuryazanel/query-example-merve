@@ -45,5 +45,39 @@
       "id": "nobel prizes channel",
       "courses": ["the math prize", "the physic prize", "the chemistry prize"]
     }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "label": "red"
+    },
+    {
+      "id": 2,
+      "label": "green"
+    },
+    {
+      "id": 3,
+      "label": "blue"
+    },
+    {
+      "id": 4,
+      "label": "yellow"
+    },
+    {
+      "id": 5,
+      "label": "black"
+    },
+    {
+      "id": 6,
+      "label": "white"
+    },
+    {
+      "id": 7,
+      "label": "orange"
+    },
+    {
+      "id": 8,
+      "label": "purple"
+    }
   ]
 }

@@ -117,3 +117,24 @@ in the App.js we declerad the queryClient before, so that queryClient instance c
 
 Now if we open RQ Super Hero page and then go to the a suoer hero's detail page we don't see loading indicator anymore. Cause the datils page has an 
 initial query data which comes from RQ Super Hero Page's query. But a background fetching is still proccessed. 
+
+12. Paginated Queries
+ Json-server supports paginated parameters. (localhost:4000/colors?_limit=2&_page=4 and etc.)
+ configure the fetch function like this:
+ const fetchColors = (pageNumber) => {
+    return axios.get(`http://localhost:4000/colors?_limit=2&_page=${pageNumber}`);
+}
+And use a state to hold page number
+    const [pageNumber, setPageNumber] = useState(1);
+Configure the query key => ['colors', pageNumber]
+
+Add two buttons to move forward and back in the pages
+<button onClick={() => setPageNumber(page => page - 1)} disabled={pageNumber === 1}>Previos Page</button>
+<button onClick={() => setPageNumber(page => page + 1)} disabled={pageNumber === 4}>Next Page</button>
+
+Thats all!
+
+(A quick note: 
+keepPreviousData: query maintain the data from last successfull fetch when the new data is requested even if the query key has changed
+it can be usefull when deailing with tables and etc
+)

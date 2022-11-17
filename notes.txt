@@ -138,3 +138,43 @@ Thats all!
 keepPreviousData: query maintain the data from last successfull fetch when the new data is requested even if the query key has changed
 it can be usefull when deailing with tables and etc
 )
+
+13. Infinite Queries
+
+-We can use getNextPageParam option to hold page params 
+   getNextPageParam: (_lastPage, pages) => {
+                if (pages.length < 4) {
+                    return pages.length + 1
+                } else {
+                    return undefined //sets hasPage to false
+                }
+            }
+(above 4 is page number)
+-And use useInfiniteQuery to fetch with infinite query
+   const { data, isLoading, error, isError, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(['colors'], fetchColors,
+        {
+            getNextPageParam: (_lastPage, pages) => {
+                if (pages.length < 4) {
+                    return pages.length + 1
+                } else {
+                    return undefined //sets hasPage to false
+                }
+            }
+        });
+
+   - For the rendering data change data?data.map to data?.page.map  --->
+    data?.pages.map((group, index) => {
+                    return (
+                        <Fragment key={index}>
+                            {
+                                group.data.map((color) => {
+                                    return (
+                                        <h2 key={color.id}>
+                                            {color.id}-{color.label}
+                                        </h2>
+                                    )
+                                })
+                            }
+                        </Fragment>
+                    )   
+                    <---

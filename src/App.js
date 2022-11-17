@@ -11,6 +11,7 @@ import ParallelQueriesPage from './components/ParallelQueries.page';
 import DynamicParallelPage from './components/DynamicParallel.page';
 import DependentQueriesPage from './components/DependentQueries.page';
 import PaginatedQueriesPage from './components/PaginatedQueries.page';
+import InfiniteQueriesPage from './components/InfiniteQueries.page';
 
 
 //create an instance of the query client
@@ -48,9 +49,14 @@ function App() {
               <li>
                 <Link to='/rq-paginated-queries'>RQ Paginated Queries</Link>
               </li>
+              <li>
+                <Link to='/rq-infinite-queries'>RQ Infinite Queries</Link>
+              </li>
             </ul>
           </nav>
           <Routes>
+            <Route path='/rq-infinite-queries' element={<InfiniteQueriesPage />} >
+            </Route>
             <Route path='/rq-paginated-queries' element={<PaginatedQueriesPage />} >
             </Route>
             <Route path='/rq-dependent' element={<DependentQueriesPage email='ophiuchusindelisi@gmail.com' />} >

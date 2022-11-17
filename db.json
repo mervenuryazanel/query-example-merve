@@ -14,6 +14,76 @@
       "id": 3,
       "name": "Wonder Woman",
       "alterEgo": "Princess Diana"
+    },
+    {
+      "name": "Supergirl",
+      "alterEgo": "Beyza Kaynak",
+      "id": 4
+    },
+    {
+      "name": "Wonderboy",
+      "alterEgo": "Murat Can Yusufoğlu",
+      "id": 5
+    },
+    {
+      "name": "asdasd",
+      "alterEgo": "asdasd",
+      "id": 6
+    },
+    {
+      "name": "asdasd",
+      "alterEgo": "asdasd",
+      "id": 7
+    },
+    {
+      "name": "dfgdfg",
+      "alterEgo": "dfgdfg",
+      "id": 8
+    },
+    {
+      "name": "asfafds",
+      "alterEgo": "dsfsdf",
+      "id": 9
+    },
+    {
+      "name": "ffgdgdf",
+      "alterEgo": "dfgdfg",
+      "id": 10
+    },
+    {
+      "name": "fgfghfgh",
+      "alterEgo": "bbbbb",
+      "id": 11
+    },
+    {
+      "name": "fgfghfgh",
+      "alterEgo": "bbbbb",
+      "id": 12
+    },
+    {
+      "name": "fgfghfgh",
+      "alterEgo": "bbbbb",
+      "id": 13
+    },
+    {
+      "name": "asdasd",
+      "alterEgo": "asdad",
+      "id": 14
+    },
+    {
+      "name": "asdasd",
+      "alterEgo": "asdad",
+      "id": 15
+    },
+    {
+      "name": "asdasd",
+      "alterEgo": "asdad",
+      "id": 16
+    },
+    {
+      "name": "aa",
+      "alterEgo": "aa",
+      "id": 17
     }
   ],
   "friends": [
@@ -39,11 +109,19 @@
   "channels": [
     {
       "id": "dundy awards channel",
-      "courses": ["the longest engament", "the funniest person", "the warrior"]
+      "courses": [
+        "the longest engament",
+        "the funniest person",
+        "the warrior"
+      ]
     },
     {
       "id": "nobel prizes channel",
-      "courses": ["the math prize", "the physic prize", "the chemistry prize"]
+      "courses": [
+        "the math prize",
+        "the physic prize",
+        "the chemistry prize"
+      ]
     }
   ],
   "colors": [

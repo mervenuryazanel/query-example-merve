@@ -178,3 +178,39 @@ it can be usefull when deailing with tables and etc
                         </Fragment>
                     )   
                     <---
+
+14. Mutations
+(Json-server supports post request)
+
+Use mutations to create, update or delete data (useQuery has a hook named useMutation already )
+A query key is optional to useMutation
+
+First create a post request for create a super hero in the same custom hook
+const addSuperHero = (hero) => {
+    return axios.post("http://localhost:4000/superHeroes", hero);
+}
+ 
+Create and export a hook for adding super hero (useAddSuperHeroData) in your custom hook (useSuperHeroesData) for query.
+
+export const useAddSuperHeroData = () => {
+    return useMutation(addSuperHero)
+}
+
+On the RQSuperHeroesPage define 2 states which holds name and alterEgo of hero
+  const [name, setName] = useState('');
+  const [alterEgo, setAlterEGo] = useState('');
+
+Use useAddSuperHeroData() here.
+  const { mutate: addHero } = useAddSuperHeroData() (if there are multiple mutations ---> mutations: addHero)
+  const { mutate } = useAddSuperHeroData() (if there is a single mutation  it can stay like this---> mutations)
+
+create a function to handle adding hero
+ const handleAddHeroClick = () => {
+    console.log({ name, alterEgo });
+    const hero = { name, alterEgo };
+    addHero(hero);
+  }
+
+Lastly create a button to fire the handleAddHeroClick function
+        <button onClick={refetch}>Show Heroes</button>
+Volaaa! You can see the new hero after refetch the heros and also in the db.json

@@ -111,7 +111,7 @@ to this --->
 }
 ```
 
-# Query By inside
+# Query By Ids
 
 First, we should be able to create a query key for each hero **(['super-hero', heroId])**
 

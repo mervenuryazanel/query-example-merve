@@ -59,7 +59,7 @@ export function RQSuperHeroesPage() {
               </div>)
           })
         }
-        {isFetching ? 'Loading...' : null}
+        {/* {isFetching ? 'Loading...' : null} */}
       </div>
     </>
   )

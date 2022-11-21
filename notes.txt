@@ -274,3 +274,37 @@ export const useAddSuperHeroData = () => {
 }
 
 Sum it up, with this configuration there will be no get request after the mutation
+
+17. Optimistic updates
+The aim is to create a hero and update the hero list even before the post request actually fired.
+If we click the 'Add hero' button first we see the optimistic update and then a background fetch will be proccessed but from the clientside there will be no change.
+
+For achieving this aim we will use three call back function belongs to the useMutation:
+-onMutate: is called before the mutation function is fired and it basically updates the hero list even before the post request.
+-onError: access query data and that return from the on mutate call back and sets the old query data as current data when an error occurs
+-onSettled: ensure the client state is in sync with the server state
+
+ return useMutation(addSuperHero, {
+        onMutate: async (newHero) => { 
+            await queryClient.cancelQueries('super-heroes') 
+            const previousData = queryClient.getQueryData('super-heroes')
+            queryClient.setQueryData('super-heroes', 
+                (oldQueryData) => {
+                    return {
+                        ...oldQueryData,
+                        // data: [...oldQueryData.data, newHero.data]
+                        data: [
+                            ...oldQueryData.data, { id: oldQueryData?.data?.lenght + 1, ...newHero }
+                        ],
+
+                    }
+
+                })
+        },
+        onError: (_error, _hero, context) => {
+            queryClient.setQueryData('super-heroes', context.previousData)
+        },
+        onSettled: () => { 
+            queryClient.invalidateQueries('super-heroes') 
+        }
+    })

@@ -1,8 +1,12 @@
-**Thank Vishwas( @CodevolutionWeb) for all these tutorials and sources. 🚀**
+**Thank Vishwas( @CodevolutionWeb) for all these tutorials and sources.**
 
 *https://www.youtube.com/watch?v=HH68tHPq7tA&list=PLC3y8-rFHvwjTELCrPrcZlo6blLBUspd2&index=17&ab_channel=Codevolution*
 
 > Note: In this app, each page is a component that can be routed in the applicaiton.
+
+# Configuration
+
+### `yarn start` or
 
 # Start the applicaiton
 
@@ -44,7 +48,7 @@ useQuery('super-heroes',fetchSuperHeroes,{cacheTime:1000,staleTime:10000})
 
 # refetchOnMount, refetchOnWindowFocus
 
-```ruby
+```
 useQuery('super-heroes',fetchSuperHeroes,{refetchOnMount:true, refetchOnWindowFocus:true})
 ```
 
@@ -56,7 +60,7 @@ useQuery('super-heroes',fetchSuperHeroes,{refetchOnMount:true, refetchOnWindowFo
 
 # Polling (refetchInterval, refetchIntervalInBackground)
 
-```ruby
+```
 useQuery('super-heroes',fetchSuperHeroes,{refetchInterval:2000, refetchIntervalInBackground:true })
 ```
 
@@ -67,63 +71,36 @@ useQuery('super-heroes',fetchSuperHeroes,{refetchInterval:2000, refetchIntervalI
 
 First, enable the fetch on the component mount.
 
-```ruby
+```
 useQuery('super-heroes',fetchSuperHeroes,{enabled:false})
 ```
 
 Then inside the onClick of a button, use the **'refetch'** function that React query provides us to fetch the data with query.
-
-```ruby
- <button onClick={refetch}> Fetch The Super Heroes </button>
-```
-
-Vola! That's it! 🙂
+Vola! That's it!
 
 # Data Transformation
 
 To select a property from the data use the **'select'** option.
 
-```ruby
+```
 useQuery('super-heroes',fetchSuperHeroes, { select: (data) => { const heroNames = data.data.map((hero) => hero.name); return heroNames; }})
 ```
 
 After that inside the component, we can use **heroNames**, cause it refers to the original data.
 
-map function change from this--->
-
-```ruby
-{
-    data?.data.map((hero) => {
-        return <div key={hero.name}> {hero.name} </div>
-        }
-    )
-}
-```
-
-to this --->
-
-```ruby
-{
-    data.map(heroName => {
-          return <div key={heroName}>{heroName}</div>
-        }
-    )
-}
-```
-
 # Query By inside
 
 First, we should be able to create a query key for each hero **(['super-hero', heroId])**
 
-```ruby
+```
 useQuery(['super-hero', heroId], fetchSuperHero);
 ```
 
-Here we can define the query key as an array and
+--> here we can define the query key as an array and
 give the hero id to it as a second argument.
 Secondly, we need to change the fetch function to give it the heroId
 
-```ruby
+```
 const fetchSuperHero = (heroId) => { return axios.get(`http://localhost:4000/superHeroes/${heroId}`) }
 
 export const useSuperHeroData = (heroId) => {
@@ -131,9 +108,9 @@ return useQuery(['super-hero', heroId], () => fetchSuperHero(heroId));
 }
 ```
 
-_but we can do this simpler like that:_
+_but we can do it simpler like that:_
 
-```ruby
+```
 const fetchSuperHero = ({ queryKey }) => {
 const heroId = queryKey[1];
 console.log("query key:", queryKey);
@@ -146,10 +123,9 @@ return useQuery(['super-hero', heroId], fetchSuperHero);
 
 because react query provides queryKey to us and we can destructure the id from it and use it easily.
 And we can use the new hook (**useSuperHeroData**) inside our new page (**RQSuperHero**)
-
 _And don't forget to add the path to the app.js like this:_
 
-```ruby
+```
 <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />} >
 </Route>
 ```
@@ -160,14 +136,14 @@ If we need to fetch some data from the db and it is dynamic, changing data we sh
 For that, all we need to do is to use '**useQueries**' (_not 'useQuery'_) with ids.
 And then we can return the **queryResult**.
 
-```ruby
+```
 const fetchSuperHero = (heroId) => {
 return axios.get(`http://localhost:4000/superHeroes/${heroId}`);
 }
 ```
 
-```ruby
-const queryResults = useQueries( // it returns an array of query results
+```
+const queryResults = useQueries( //it returns an array of query results
 heroIds.map((id) => {
 return {
 queryKey: ['super- hero', id],
@@ -189,7 +165,7 @@ secondly by using the _chnannelId_ that belongs to the user create a second quer
 
 In the App.js we declared the _queryClient_ before so that **queryClient instance can access the query cache**
 
-```ruby
+```
 const queryClient = useQueryClient();
 return useQuery(['super-hero', heroId], fetchSuperHero,
 {
@@ -204,7 +180,9 @@ const hero = queryClient.getQueryData('super-heroes')?.data?.find(hero => hero.i
                        return undefined;
                    }
                }
-});
+           });
+
+   }
 ```
 
 Now if we open RQ Super Hero page and then go to a super hero's detail page we don't see the loading indicator anymore. Cause the datils page has an
@@ -217,7 +195,7 @@ initial query data which comes from RQ Super Hero Page's query. But* a backgroun
 
 Configure the fetch function like this:
 
-```ruby
+```
 const fetchColors = (pageNumber) => {
 return axios.get(`http://localhost:4000/colors?_limit=2&_page=${pageNumber}`);
 }
@@ -226,35 +204,36 @@ return axios.get(`http://localhost:4000/colors?_limit=2&_page=${pageNumber}`);
 And use a state to hold the page number
 const
 
-```ruby
+```
 [pageNumber, setPageNumber] = useState(1);
 Configure the query key => ['colors', pageNumber]
 ```
 
 Add two buttons to move forward and back in the pages
 
-```ruby
+```
+
 <button onClick={() => setPageNumber(page => page - 1)} disabled={pageNumber === 1}>Previos Page</button>
 <button onClick={() => setPageNumber(page => page + 1)} disabled={pageNumber === 4}>Next Page</button>
 ```
 
 **That's all!**
 
-> A quick note--> keepPreviousData: query maintains the data from the last successfull fetch when the new data is requested even if the query key has changed
-
+> A quick note:
+> keepPreviousData: query maintains the data from the last successfull fetch when the new data is requested even if the query key has changed
 > it can be useful when dealing with tables, etc.
 
 # Infinite Queries
 
 We can use the **getNextPageParam** option to hold page params
 
-```ruby
+```
 getNextPageParam: (\_lastPage, pages) => {
-    if (pages.length < 4) {
-      return pages.length + 1
-    } else {
-      return undefined //sets hasPage to false
-    }
+if (pages.length < 4) {
+return pages.length + 1
+} else {
+return undefined //sets hasPage to false
+}
 }
 ```
 
@@ -262,7 +241,7 @@ _(above 4 is page number)_
 
 And use **useInfiniteQuery** to fetch with infinite query
 
-```ruby
+```
 const { data, isLoading, error, isError, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(['colors'], fetchColors,
 {
 getNextPageParam: (\_lastPage, pages) => {
@@ -277,22 +256,21 @@ return undefined //sets hasPage to false
 
 - For the rendering data change data?data.map to data?.page.map --->
 
-```ruby
+```
  data?.pages.map((group, index) => {
-    return (
-        <Fragment key={index}>
-        {
-            group.data.map((color) => {
-                return (
-                    <h2 key={color.id}>
-                      {color.id}-{color.label}
-                    </h2>
-                )
-            })
-        }
-        </Fragment>
-    )
+ return (
+ <Fragment key={index}>
+ {
+ group.data.map((color) => {
+ return (
+ <h2 key={color.id}>
+ {color.id}-{color.label}
+ </h2>
+ )
  })
+ }
+ </Fragment>
+ )
 ```
 
 # Mutations
@@ -305,7 +283,7 @@ _A query key is optional to useMutation_
 
 - First, create a post request to create a super hero in the same custom hook
 
-```ruby
+```
 const addSuperHero = (hero) => {
 return axios.post("http://localhost:4000/superHeroes", hero);
 }
@@ -313,7 +291,7 @@ return axios.post("http://localhost:4000/superHeroes", hero);
 
 - Create and export a hook for adding super hero (useAddSuperHeroData) in your custom hook (useSuperHeroesData) for query.
 
-```ruby
+```
 export const useAddSuperHeroData = () => {
 return useMutation(addSuperHero)
 }
@@ -321,21 +299,22 @@ return useMutation(addSuperHero)
 
 - On the RQSuperHeroesPage _define 2 states which holds **name** and **alterEgo** of hero_
 
-```ruby
+```
 const [name, setName] = useState('');
 const [alterEgo, setAlterEGo] = useState('');
 ```
 
 - Use **useAddSuperHeroData()** here.
 
-```ruby
-const { mutate: addHero } = useAddSuperHeroData(); //(if there are multiple mutations ---> mutations: addHero)
-const { mutate } = useAddSuperHeroData(); //(if there is a single mutation it can stay like this---> mutations)
+```
+const { mutate: addHero } = useAddSuperHeroData() //(if there are multiple mutations ---> mutations: addHero)
+const { mutate } = useAddSuperHeroData() //(if there is a single mutation it can stay like this---> mutations)
 ```
 
 - Create a function to handle adding a hero
 
-```ruby
+```
+
  const handleAddHeroClick = () => {
  console.log({ name, alterEgo });
  const hero = { name, alterEgo };
@@ -345,7 +324,7 @@ const { mutate } = useAddSuperHeroData(); //(if there is a single mutation it ca
 
 Lastly, create a button to fire the **handleAddHeroClick** function
 
-```ruby
+```
 <button onClick={refetch}>Show Heroes</button>
 ```
 
@@ -356,14 +335,14 @@ Lastly, create a button to fire the **handleAddHeroClick** function
 For example, after we add a super hero we want to show the list of hero be able to update itself.
 For that follow these steps:
 
-```ruby
+```
 use useQueryClient to access related query key
  const queryClient = useQueryClient();
 ```
 
 in **useMutation** function add a **onSuccess** option and inside of it invalidate queiry by this:
 
-```ruby
+```
 queryClient.invalidateQueries('super-heroes')
 ```
 
@@ -371,12 +350,12 @@ _by this invalidation react query refetch the '**super-heros**' data_
 
 After that **useAddSuperHeroData** function should be like:
 
-```ruby
+```
 export const useAddSuperHeroData = () => {
 const queryClient = useQueryClient();
 return useMutation(addSuperHero, {
 onSuccess: () => { //run after mutation is successful (invalidate query’s method for achieving that.)
-queryClient.invalidateQueries('super-heroes'); //by this invalidation react query refetch the 'super-heros' data
+queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
 }
 })
 }
@@ -391,25 +370,28 @@ So it might be useful to use this response instead of making a new get request t
 
 - response to the post--->
 
-```json
+```
 {
-  "name": "s",
-  "alterEgo": "asds",
-  "id": 6
+"name": "s",
+"alterEgo": "asds",
+"id": 6
 }
 ```
 
-```ruby
+```
 export const useAddSuperHeroData = () => {
 const queryClient = useQueryClient();
 return useMutation(addSuperHero, {
-onSuccess: (data) => {
-queryClient.setQueryData('super-heroes',
+onSuccess: (data) => { //data is the entire response that turns from post request
+// queryClient.invalidateQueries('super-heroes') //by this invalidation react query refetch the 'super-heros' data
+queryClient.setQueryData('super-heroes', // //setQueryData updates the query cache
 (oldQueryData) => { // this function automatically receives all query data (what is present in the query cache) as an argument
 return {
 ...oldQueryData,
 data: [...oldQueryData.data, data.data]
-}})
+}
+
+               })
        }
    })
 
@@ -417,10 +399,7 @@ data: [...oldQueryData.data, data.data]
 
 ```
 
-> -In the onSuccess function, data is the entire response that turns from post request
-> -setQueryData updates the query cache
-
-> To sum it up, with this configuration _there will be no get request after the mutation_
+To sum it up, with this configuration _there will be no get request after the mutation_
 
 # Optimistic updates
 
@@ -435,7 +414,7 @@ If we click the 'Add hero' button first we see the optimistic update and then a 
 
 **onSettled**: ensure the client state is in sync with the server state
 
-```ruby
+```
 return useMutation(addSuperHero, {
 onMutate: async (newHero) => {
 await queryClient.cancelQueries('super-heroes')
@@ -472,7 +451,7 @@ In there define a function (maybe named _request_) **that will wrap the axios re
 Create an axios client, inside the 'request' function spread out the _axios opitons_, define **authorization token**, **onSucces**, and **onError** callbacks.
 And eventually return the client.
 
-```ruby
+```
 const client = axios.create({ baseURL: 'http://localhost:4000' }) //an axios client
 ```
 
@@ -480,7 +459,7 @@ _baseUrl: our json-server url_
 
 _the **request** function wraps the axios request and accepts all the options that axios accepts_
 
-```ruby
+```
 export const request = ({ ...options }) => {
 client.defaults.headers.common.Authorization = `Bearer token`; // now we can find this bearer token in the header
 const onSuccess = (response) => response;
@@ -499,7 +478,7 @@ We can use this interceptor where we make the axios requests before
 
 - Get requests for changes from this
 
-```ruby
+```
 const fetchSuperHeroes = () => {
 return axios.get("http://localhost:4000/superHeroes")
 }
@@ -507,7 +486,7 @@ return axios.get("http://localhost:4000/superHeroes")
 
 to this --->
 
-```ruby
+```
 const fetchSuperHeroes = () => {
 return request({ url: '/superHeroes' })
 }
@@ -515,7 +494,7 @@ return request({ url: '/superHeroes' })
 
 - Or for post requests:
 
-```ruby
+```
 const addSuperHero = (hero) => {
 return axios.post("http://localhost:4000/superHeroes", hero);
 }
@@ -523,7 +502,7 @@ return axios.post("http://localhost:4000/superHeroes", hero);
 
 --->
 
-```ruby
+```
 const addSuperHero = (hero) => {
 return request({
 url: '/superHeroes', method: 'post', data: hero
